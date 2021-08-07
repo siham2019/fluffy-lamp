@@ -8,8 +8,9 @@
                 <input type="text">
                 <button>add comment</button>
        <p>----------------------------------------</p> 
-      <div class="comment" v-for="item in 5" :key="item.id">
-              <p>Lorem ipsum dolor sit amet.</p>
+      <div class="comment" v-for="item in comments" :key="item.id">
+              <h4>{{item.name}}</h4>
+              <p>{{item.body}}</p>
               <small>{{ new Date().toUTCString() }}</small>
                  <br>
                 <br>
@@ -21,9 +22,29 @@
 
 </template>
 
+<script>
+import { mapActions, mapGetters } from 'vuex'
+
+export default {
+   computed:{
+     ...mapGetters("comments",["getComment"]),
+     comments(){
+       return this.getComment;
+     }
+   },
+    methods:{
+      ...mapActions("comments",["getCurrent"])
+    },
+    beforeMount(){
+       this.getCurrent(this.$route.params.id) 
+   }  
+}
+
+</script>
+
 
 <style>
- 
+   
  .comment{
      padding: 5px;
      margin-bottom: 5px;

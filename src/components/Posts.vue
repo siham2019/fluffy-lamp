@@ -8,10 +8,9 @@
               <h3> {{item.title}} </h3>
                 <hr>
               <small>{{new Date().toUTCString()}}</small>
-              <p>{{item.body.slice(0,45)}}... <a href="#">view more</a></p>
+              <p>{{item.body.slice(0,45)}}... <router-link :to="'/post/'+item.id">view more</router-link></p>
 
        </div>
-
    </div>
 
 </template>

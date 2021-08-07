@@ -5,13 +5,13 @@
     
     
     <h1> Posts</h1>
-    <posts/>
+
 <!--     <post/>
     
 
        <comment/> -->
 
-
+     <router-view></router-view>
   </div>
 </template>
 
@@ -19,15 +19,11 @@
 /* import Comment from './components/Comment.vue'
 import Post from './components/Post.vue'
  */
-import Posts from './components/Posts.vue'
+
 
 export default {
   name:"App",
-  components :{
-/*     Post,
-    Comment
-     */Posts
-  }
+
 }
 </script>
 

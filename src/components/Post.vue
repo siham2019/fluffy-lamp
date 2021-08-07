@@ -1,33 +1,65 @@
 <template>
-    <div id="post">
+    <div>
+      
+       <div id="post">
         
-        <h2>post</h2>
-
-        <p>---------------------------</p>
         
-        <small>{{ new Date().toUTCString() }}</small>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident libero ex rerum?
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, quos saepe. Nihil? 
-          
-          <br>
-          <br>
-               <button> like (0) </button>
-        </p>
+           <h2>{{post.title}}</h2>
 
+            <p>---------------------------</p>
+        
+               <small>{{ new Date().toUTCString() }}</small>
+                 <p>
+                     {{post.body}}
+                         <br>
+                         <br>
+                   
+              </p>
+                    <div v-if="likes">
+                       <button v-if="likes.isActive" v-on:click="unlike()">unlike({{likes.number}})</button>
+                       <button v-else v-on:click="like()"> like ({{likes.number}}) </button>
+
+                    </div>   
+                    <div v-else>
+                       <button v-on:click.prevent="like()"> like (0) </button>
+
+                    </div>
   
+        </div>
+     <comment/>  
+  </div>
      
 
 
-    </div>
 </template>
 
 
 <script>
 
-  
+  import  { mapGetters, mapMutations } from 'vuex'
+import Comment from './Comment.vue'
    
    export default {
-   
+  components: { Comment },
+       computed:{
+          ...mapGetters("posts",["getPost","getLikes"]),
+          post(){
+            return this.getPost(this.$route.params.id)
+          },
+          likes(){
+            return this.getLikes(this.$route.params.id)
+          }
+
+       },
+       methods:{
+          ...mapMutations("posts",["like"])
+         ,like(){
+           
+           console.log("like (:");
+             this.like(this.likes,this.$route.params.id)
+/*             return this.getPost(this.$route.params.id)
+ */         }
+       }
     }
 
 </script>

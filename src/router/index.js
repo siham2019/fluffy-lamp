@@ -1,14 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-
+import Post from '../components/Post.vue'
+import Posts from '../components/Posts.vue'
 
 
 
 Vue.use(VueRouter)
 
 const routes = [
-
+   
+    {
+      path:"/",
+      component:Posts
+    },  
+     {
+      path:"/post/:id",
+      component:Post
+    }
+    
+  
 
 ]
 
