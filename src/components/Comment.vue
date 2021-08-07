@@ -14,7 +14,9 @@
               <small>{{ new Date().toUTCString() }}</small>
                  <br>
                 <br>
-               <button> like (0) </button>
+               <button @click="likeComment()"> 
+                   {{whichOne(item.id)}} ( {{ getLikes(item.id) }} )
+                 </button>
       </div>
       
 
@@ -27,13 +29,22 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
    computed:{
-     ...mapGetters("comments",["getComment"]),
+     ...mapGetters("comments",["getComment","getLikess"]),
      comments(){
        return this.getComment;
+     },
+     getLikes(id){
+        return this.getLikess(id)
+     },
+     whichOne(id){
+        return this.getLikes(id).number==0?'like ':'unlike ' 
      }
    },
     methods:{
-      ...mapActions("comments",["getCurrent"])
+      ...mapActions("comments",["getCurrent"]),
+      likeComment(){
+        console.log("like ^__^");
+      }
     },
     beforeMount(){
        this.getCurrent(this.$route.params.id) 

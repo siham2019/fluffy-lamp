@@ -21,7 +21,7 @@
 
                     </div>   
                     <div v-else>
-                       <button v-on:click.prevent="like()"> like (0) </button>
+                       <button v-on:click="like()"> like (0) </button>
 
                     </div>
   
@@ -52,13 +52,23 @@ import Comment from './Comment.vue'
 
        },
        methods:{
-          ...mapMutations("posts",["like"])
-         ,like(){
-           
-           console.log("like (:");
-             this.like(this.likes,this.$route.params.id)
+          ...mapMutations("posts",["likeme","unlikeme"])
+         ,
+         like(){
+            
+   
+
+              this.likeme({likes:this.likes,id:this.$route.params.id})
+
+ 
+          
 /*             return this.getPost(this.$route.params.id)
- */         }
+ */         },
+          unlike(){
+            
+            this.unlikeme(this.$route.params.id)
+
+          }
        }
     }
 

@@ -9,11 +9,19 @@ const comments={
    namespaced:true,
    state:()=>({
       comments:[],
-      likes:[]
+      likes:[
+         {
+            commentId:1,
+            number:0
+         }
+       ]
    }),
    getters:{
       getComment(state){
         return state.comments
+      },
+      getLikess(state){
+         return (id)=> state.likes.find(e=>e.commentId==id)
       }
    },
    mutations:{
@@ -66,26 +74,37 @@ const posts={
        initState(state,payload){
             state.posts=payload
        },
-       like(state,{likes,id}){
-            
-            if (likes) {
+       unlikeme(state,id){
+         let like = state.likes.filter(e=>e.postId!==id)
+         state.likes=like; 
 
-               let payload = likes
+       }
+       ,
+       likeme(state,p){
+            
+            if (p.likes) {
+
+
+               let payload = p.likes
                let like = state.likes.filter(e=>e.postId!==payload.id)
                payload.number++;
                payload.isActive=true
                like.push(payload)
                state.likes=like; 
-            
+           
+               
             }
             else{
+               
                let like={
-                  postId:id,
+                  postId:p.id,
                   number:1,
                   isActive:true
-               }
+               } 
+
                state.likes.push(like); 
-            }
+           
+            } 
     
          }
  
